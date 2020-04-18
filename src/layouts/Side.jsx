@@ -54,7 +54,12 @@ export default function SiderDemo () {
                         !collapsed && <span style={{ color: '#69c0ff', marginLeft: '10px'}}>sikies的视频库</span>
                     }
                 </div>
-                <Menu onClick={menuClickHandler} theme="dark" mode="inline" defaultSelectedKeys={['1']}>
+                <Menu
+                    onClick={menuClickHandler}
+                    theme="dark"
+                    mode="inline"
+                    defaultSelectedKeys={['video']}
+                >
                     <Menu.Item key={menuConfig.video.key}>
                         <VideoCameraOutlined />
                         <span>视频库</span>

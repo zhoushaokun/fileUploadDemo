@@ -1,0 +1,9 @@
+.uploadStatus-ceil {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    border: 1px solid #666;
+    color: red;
+    background-color: #52c41a;
+}
