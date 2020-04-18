@@ -4,6 +4,14 @@
     align-items: center;
     font-size: 18px;
     border: 1px solid #666;
-    color: red;
+    color: #1890ff;
+    height: 25px;
+}
+
+.fail {
+    color: #ff4d4f;
+}
+
+.success {
     background-color: #52c41a;
 }

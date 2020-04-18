@@ -20,27 +20,6 @@ export default class UploadVideo extends React.Component {
         this.setState({
             uploading: true,
         });
-
-        // You can use any AJAX library you like
-        // reqwest({
-        //     url: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
-        //     method: 'post',
-        //     processData: false,
-        //     data: formData,
-        //     success: () => {
-        //         this.setState({
-        //             fileList: [],
-        //             uploading: false,
-        //         });
-        //         message.success('upload successfully.');
-        //     },
-        //     error: () => {
-        //         this.setState({
-        //             uploading: false,
-        //         });
-        //         message.error('upload failed.');
-        //     },
-        // });
     };
 
     render() {
@@ -64,7 +43,7 @@ export default class UploadVideo extends React.Component {
             },
             fileList,
         };
-
+        const total = new Array(12*12).fill(0).map((item, index) => index);
         return (
             <div>
                 <Upload {...props}>
@@ -81,7 +60,7 @@ export default class UploadVideo extends React.Component {
                 >
                     {uploading ? 'Uploading' : 'Start Upload'}
                 </Button>
-                <GridUploadStatus></GridUploadStatus>
+                <GridUploadStatus data={total}></GridUploadStatus>
             </div>
         );
     }
