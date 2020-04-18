@@ -1,4 +1,8 @@
-#components-layout-demo-custom-trigger .trigger {
+.side {
+  height: 100vh;
+}
+
+.trigger {
   font-size: 18px;
   line-height: 64px;
   padding: 0 24px;
@@ -6,14 +10,17 @@
   transition: color 0.3s;
 }
 
-#components-layout-demo-custom-trigger .trigger:hover {
+ .trigger:hover {
   color: #1890ff;
 }
 
-#components-layout-demo-custom-trigger .logo {
+.logo {
   height: 32px;
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(0, 0, 0, 0.65);
   margin: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .site-layout .site-layout-background {
