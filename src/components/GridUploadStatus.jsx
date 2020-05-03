@@ -17,7 +17,7 @@ function request(item) {
                 resolve(item);
             }
             else reject(item);
-        }, 3000);
+        }, Math.random()*2000 + 1000);
     });
 }
 
@@ -34,52 +34,58 @@ export default class GridUploadStatus extends Component {
         super(props);
         const { data } = this.props
         this.state = {
+            // finished: [],
+            // current: [],
+            // toUpload: new Array(data.length).fill(GridUploadStatus.ready),
             ceilFlags: new Array(data.length).fill(GridUploadStatus.ready),
         };
     }
 
     trigger = () => {
-        let num = 0;
-        const { data } = this.props
+        let num = 1;
+        const { data } = this.props;
         const setFlag = (item, flag, ceilFlags) => {
             const tempList = [...ceilFlags];
-            tempList[item] = flag;
+            for (let i = 0; i < item.length; i++) {                    
+                tempList[item[i]] = flag;
+            }
             this.setState({
                 ceilFlags: tempList,
             });
         }
 
-        const upload = (left) => {
-            num++;
+        const upload = (item) => {
             const self = this;
-            let data = left.shift();
-            setFlag(data, GridUploadStatus.processing, self.state.ceilFlags);
-            request(data).then((item) => {
-                setFlag(item, GridUploadStatus.success, self.state.ceilFlags);
+            request(item).then((item) => {
+                setFlag([item], GridUploadStatus.success, self.state.ceilFlags);
                 num--;
-                return left;
             })
-            .then((left) => {
-                parellUpload(left);
+            .then(() => {
+                parellUpload();
             })
             .catch((item) => {
-                setFlag(item, GridUploadStatus.fail, self.state.ceilFlags);
+                setFlag([item], GridUploadStatus.fail, self.state.ceilFlags);
                 num--;
-                left.unshift(item);
-                parellUpload(left);
+                data.unshift(item);
+                parellUpload();
             });
         }
 
-        function parellUpload(left) {
+        const parellUpload = () => {
             // 并发量为 5
-            if (left.length > 0 && num <= 5) {
-                upload(left);
+            const toAdd = [];
+            for (let i = num; i <= 5; i ++) {
+                toAdd.push(data.shift());
+            }
+            setFlag(toAdd, GridUploadStatus.processing, this.state.ceilFlags);
+            while (data.length > 0 && num <= 5) {
+                const item = toAdd.shift();
+                upload(item);
+                num ++;
             }
         }
 
-        for (var i = 0; i < 5; i++) {
-            parellUpload(data);
-        }
+        parellUpload();
     };
         
     render (){
