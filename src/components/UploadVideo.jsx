@@ -2,6 +2,7 @@ import React from 'react';
 import { Upload, Button, message } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import GridUploadStatus from "./GridUploadStatus";
+import { test } from "../services/test";
 // import reqwest from 'reqwest';
 
 export default class UploadVideo extends React.Component {
@@ -9,6 +10,12 @@ export default class UploadVideo extends React.Component {
         fileList: [],
         uploading: false,
     };
+
+    componentDidMount () {
+        test({}, (data) => {
+            console.log('data', data);
+        });
+    }
 
     handleUpload = () => {
         const { fileList } = this.state;
