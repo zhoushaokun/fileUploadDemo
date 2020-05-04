@@ -10,9 +10,10 @@
 
 ##  启动项目
 
-`yarn start`or`npm start`
+- 根目录下`yarn start`or`npm start`
 
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
+- 根目录的`server`文件下`npm start`启动本地的服务器
 
 
